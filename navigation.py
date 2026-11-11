@@ -19,6 +19,28 @@ def _rebuild_path(came_from, cell):
 
 
 def astar(world, start, goal):
-    """Return (path, stats). path is None if there is no route.
-    stats = {'nodes_expanded': int, 'path_cost': int}"""
-    raise NotImplementedError("A1/A2: A* with counters")
+    open_list = [start]   
+    g = {start: 0}        
+    came_from = {}        
+    closed = set()        
+    nodes_expanded = 0
+
+    while len(open_list) > 0:
+        best = open_list[0]
+        for cell in open_list:
+            if g[cell] + manhattan(cell, goal) < g[best] + manhattan(best, goal):
+                best = cell
+        open_list.remove(best)
+        if best == goal:
+            return rebuild_path(came_from, best), {'nodes_expanded': nodes_expanded, 'path_cost': g[best]}
+
+        closed.add(best)
+        nodes_expanded = nodes_expanded + 1
+        for nxt in world.neighbors(best):
+            if nxt not in closed and (nxt not in g or g[best] + 1 < g[nxt]):
+                g[nxt] = g[best] + 1
+                came_from[nxt] = best
+                if nxt not in open_list:
+                    open_list.append(nxt)
+
+    return None, {'nodes_expanded': nodes_expanded, 'path_cost': None}
