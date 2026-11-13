@@ -25,6 +25,7 @@ class DynamicEvents:
             if world.is_free(cell)
             and cell != world.key
             and cell != world.door
+            and cell != world.start
             and cell != agent.position
         ]
         if not candidates:
