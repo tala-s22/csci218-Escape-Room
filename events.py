@@ -55,3 +55,18 @@ class DynamicEvents:
             if path is None:
                 return False
         return True
+# Difficulty levels: how many steps pass between two events (0 = no events).
+# The experiment runner loops over these names.
+DIFFICULTY_LEVELS = {
+    "none": 0,
+    "easy": 30,
+    "medium": 20,
+    "hard": 10,
+}
+
+
+def events_for_level(level, seed):
+    """Create the DynamicEvents object for a named difficulty level."""
+    if level not in DIFFICULTY_LEVELS:
+        raise ValueError(f"unknown difficulty level: {level}")
+    return DynamicEvents(seed, DIFFICULTY_LEVELS[level])
