@@ -9,7 +9,7 @@ STEP_COST = 1  # fixed scope: 4-direction movement, every move costs 1
 def manhattan(a, b):
     return abs(a[0] - b[0]) + abs(a[1] - b[1])
 
-def _rebuild_path(came_from, cell):
+def rebuild_path(came_from, cell):
     path = [cell]
     while cell in came_from:
         cell = came_from[cell]
