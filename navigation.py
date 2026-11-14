@@ -4,8 +4,7 @@ import heapq
 from collections import deque
 from itertools import count
 
-STEP_COST = 1  # fixed scope: 4-direction movement, every move costs 1
-
+STEP_COST = 1  
 def manhattan(a, b):
     return abs(a[0] - b[0]) + abs(a[1] - b[1])
 
