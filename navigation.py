@@ -44,3 +44,25 @@ def astar(world, start, goal):
                     open_list.append(nxt)
 
     return None, {'nodes_expanded': nodes_expanded, 'path_cost': None}
+
+def bfs(world, start, goal):
+    queue = [start]      
+    came_from = {}        
+    seen = set()          
+    seen.add(start)
+    nodes_expanded = 0
+
+    while len(queue) > 0:
+        cell = queue.pop(0)   
+        if cell == goal:
+            path = rebuild_path(came_from, cell)
+            return path, {'nodes_expanded': nodes_expanded, 'path_cost': len(path) - 1}
+
+        nodes_expanded = nodes_expanded + 1
+        for nxt in world.neighbors(cell):
+            if nxt not in seen:
+                seen.add(nxt)
+                came_from[nxt] = cell
+                queue.append(nxt)
+
+    return None, {'nodes_expanded': nodes_expanded, 'path_cost': None}
