@@ -13,3 +13,6 @@ Project structure:
 - tests/ - One test file per member
 
 Install and run instructions will be added before submission.
+
+## Conventions
+- agent.path starts with the agent's current cell, so path[1] is the next cell to move to.
