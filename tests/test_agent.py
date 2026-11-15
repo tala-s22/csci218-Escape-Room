@@ -36,17 +36,19 @@ class TestAdaptiveAgent(unittest.TestCase):
 
         self.assertEqual(agent.state, "ESCAPED")
         self.assertTrue(agent.done())
+        self.assertTrue(agent.success)
 
     def test_replanning(self):
         world = World(5, set(), (0, 0), (0, 4), (4, 4))
         agent = AdaptiveAgent(world)
 
         agent.step()
-        world.block((0, 2))
+        blocked_cell = agent.path[1]
+        world.block(blocked_cell)
         agent.step()
 
         self.assertEqual(agent.replans, 1)
-        self.assertNotEqual(agent.position, (0, 2))
+        self.assertNotEqual(agent.position, blocked_cell)
 
     def test_no_path(self):
         walls = {(0, 1), (1, 0)}

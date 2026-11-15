@@ -40,6 +40,10 @@ class AdaptiveAgent:
         if self.done():
             return
 
+        # REPLAN stays visible for one tick; go back to normal now.
+        if self.state == "REPLAN":
+            self.state = "GO_TO_DOOR" if self.has_key else "FIND_KEY"
+
         # Handle starting directly on the key.
         if self.position == self.world.key and not self.has_key:
             self.has_key = True
@@ -66,10 +70,6 @@ class AdaptiveAgent:
             if not self.plan_path():
                 return
 
-            self.state = (
-                "GO_TO_DOOR" if self.has_key else "FIND_KEY"
-            )
-
         # Move exactly one cell.
         if len(self.path) > 1:
             self.position = self.path[1]
@@ -89,3 +89,8 @@ class AdaptiveAgent:
     def done(self):
         """Return True when the agent escapes or fails."""
         return self.state in ("ESCAPED", "FAILED")
+
+    @property
+    def success(self):
+        """True if the agent escaped."""
+        return self.state == "ESCAPED"
