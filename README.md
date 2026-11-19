@@ -64,8 +64,10 @@ A blocked cell appears on the agent's path every N steps, but only if the agent 
 | `baseline.py`    | Baseline agent that never replans                                  |
 | `experiments.py` | Experiment runner that generates `results.csv` and charts          |
 | `visualise.py`   | Animated demo                                                      |
+| `pin_extension.py` | PIN lock, feedback and the two PIN crackers                      |
+| `pin_level.py`   | Level 5: the PIN world, the two PIN agents and the level runner    |
 | `main.py`        | Menu that launches the demo or the experiments                     |
-| `tests/`         | One test file per part                                             | 
+| `tests/`         | One test file per part                                             |
 
 ## Conventions
 
